@@ -1,13 +1,20 @@
 {
   "name": "tob-multi-tenant-admin",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently -n shared,api,web \"pnpm --filter @repo/shared dev\" \"pnpm --filter api start:dev\" \"pnpm --filter web dev\"",
+    "build": "pnpm --filter @repo/shared build && pnpm --filter api build && pnpm --filter web build",
+    "lint": "pnpm --filter api lint && pnpm --filter web lint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.28.2"
+  "packageManager": "pnpm@10.28.2",
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "typescript": "^6.0.3"
+  }
 }
